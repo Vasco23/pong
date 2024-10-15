@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://boesey1l5ptdj"]
+
+[ext_resource type="Script" path="res://ball.gd" id="1_5wxbd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucn4h"]
+size = Vector2(10, 10)
+
+[node name="ball" type="CharacterBody2D"]
+light_mask = 5
+position = Vector2(965, 535)
+script = ExtResource("1_5wxbd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 5
+shape = SubResource("RectangleShape2D_ucn4h")

@@ -1,0 +1,182 @@
+[gd_scene load_steps=12 format=3 uid="uid://05h3qoxembx1"]
+
+[ext_resource type="Script" path="res://local_multiplayer.gd" id="1_sk1qh"]
+[ext_resource type="PackedScene" uid="uid://boesey1l5ptdj" path="res://ball.tscn" id="2_npev6"]
+[ext_resource type="PackedScene" uid="uid://co07ldsk0mlm7" path="res://player_1.tscn" id="3_t3bkj"]
+[ext_resource type="PackedScene" uid="uid://1fdqjes264am" path="res://static_body_2d.tscn" id="4_i3dhs"]
+[ext_resource type="Script" path="res://player_2.gd" id="5_yqwlo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2ghl"]
+size = Vector2(20, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xjb8"]
+size = Vector2(101, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bsdvd"]
+size = Vector2(106, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_155gw"]
+size = Vector2(10, 1079)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipoom"]
+size = Vector2(55, 1073.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ijp"]
+size = Vector2(51.5, 1063)
+
+[node name="local_multiplayer" type="Node2D"]
+script = ExtResource("1_sk1qh")
+
+[node name="ball" parent="." instance=ExtResource("2_npev6")]
+visibility_layer = 2
+collision_layer = 13
+collision_mask = 2
+
+[node name="player_1" parent="." instance=ExtResource("3_t3bkj")]
+light_mask = 1
+collision_layer = 15
+
+[node name="player_2" type="CharacterBody2D" parent="."]
+position = Vector2(1890, 505)
+collision_layer = 15
+script = ExtResource("5_yqwlo")
+
+[node name="ColorRect" type="ColorRect" parent="player_2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -35.0
+offset_right = 10.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_2"]
+shape = SubResource("RectangleShape2D_o2ghl")
+
+[node name="Timer" type="Timer" parent="player_2"]
+
+[node name="leftgoal" type="Area2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+collision_layer = 3
+collision_mask = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="leftgoal"]
+light_mask = 8
+visibility_layer = 3
+position = Vector2(-50.5, 540)
+shape = SubResource("RectangleShape2D_6xjb8")
+
+[node name="rightgoal" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rightgoal"]
+position = Vector2(1973, 540)
+shape = SubResource("RectangleShape2D_bsdvd")
+one_way_collision_margin = 0.0
+
+[node name="hub" type="CanvasLayer" parent="."]
+
+[node name="result player2" type="Label" parent="hub"]
+offset_left = 970.0
+offset_top = 1.0
+offset_right = 1078.0
+offset_bottom = 66.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="result player" type="Label" parent="hub"]
+texture_filter = 1
+custom_minimum_size = Vector2(20, 0)
+offset_left = 860.0
+offset_right = 960.0
+offset_bottom = 70.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time" type="Label" parent="hub"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.10817, 0.00262456, 0.112092, 1)
+top_level = true
+texture_filter = 1
+offset_left = 926.0
+offset_top = 504.0
+offset_right = 1006.0
+offset_bottom = 564.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="winlose window" type="Label" parent="hub"]
+offset_left = 778.0
+offset_top = 461.0
+offset_right = 1156.0
+offset_bottom = 611.0
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="windowtime" type="Timer" parent="hub/winlose window"]
+
+[node name="type timeP1" type="Label" parent="hub"]
+offset_left = 775.0
+offset_top = 1031.0
+offset_right = 835.0
+offset_bottom = 1079.0
+
+[node name="typetimeP2" type="Label" parent="hub"]
+offset_left = 1095.0
+offset_top = 1031.0
+offset_right = 1155.0
+offset_bottom = 1079.0
+
+[node name="meio" type="StaticBody2D" parent="."]
+light_mask = 16
+collision_mask = 16
+
+[node name="ColorRect" type="ColorRect" parent="meio"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 960.0
+offset_right = 970.0
+offset_bottom = 1079.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="meio"]
+visible = false
+light_mask = 0
+visibility_layer = 0
+position = Vector2(965, 535)
+shape = SubResource("RectangleShape2D_155gw")
+
+[node name="walls" parent="." instance=ExtResource("4_i3dhs")]
+collision_layer = 3
+collision_mask = 4
+
+[node name="start_ball" type="Timer" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-27.5, 538.25)
+shape = SubResource("RectangleShape2D_ipoom")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1946.25, 537.5)
+shape = SubResource("RectangleShape2D_k6ijp")
+
+[connection signal="timeout" from="player_2/Timer" to="player_2" method="_on_timer_timeout"]
+[connection signal="body_entered" from="leftgoal" to="." method="_on_leftgoal_body_entered"]
+[connection signal="body_entered" from="rightgoal" to="." method="_on_rightgoal_body_entered"]
+[connection signal="timeout" from="hub/winlose window/windowtime" to="." method="_on_windowtime_timeout"]
+[connection signal="timeout" from="start_ball" to="ball" method="_on_start_ball_timeout"]

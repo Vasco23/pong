@@ -1,0 +1,134 @@
+[gd_scene load_steps=11 format=3 uid="uid://c3g3y0nayuodn"]
+
+[ext_resource type="Script" path="res://singleplayer.gd" id="1_oex56"]
+[ext_resource type="Script" path="res://player.gd" id="2_3080p"]
+[ext_resource type="Script" path="res://ball.gd" id="3_k7bg3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pqbhk"]
+size = Vector2(20, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejvfs"]
+size = Vector2(20, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khj2e"]
+size = Vector2(1920, 114.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjjlc"]
+size = Vector2(1920, 115)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_31iym"]
+size = Vector2(101, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42okp"]
+size = Vector2(106, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25dte"]
+size = Vector2(10, 1079)
+
+[node name="singleplayer" type="Node2D"]
+script = ExtResource("1_oex56")
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(30, 505)
+script = ExtResource("2_3080p")
+
+[node name="ColorRect" type="ColorRect" parent="player"]
+texture_filter = 1
+offset_right = 20.0
+offset_bottom = 70.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(10, 35)
+shape = SubResource("RectangleShape2D_pqbhk")
+
+[node name="ball" type="CharacterBody2D" parent="."]
+position = Vector2(965, 554)
+script = ExtResource("3_k7bg3")
+
+[node name="ColorRect" type="ColorRect" parent="ball"]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+
+[node name="bot" type="CharacterBody2D" parent="."]
+position = Vector2(1890, 505)
+
+[node name="ColorRect" type="ColorRect" parent="bot"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_bottom = 70.0
+grow_horizontal = 0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bot"]
+position = Vector2(-10, 35)
+shape = SubResource("RectangleShape2D_ejvfs")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(960, 0)
+
+[node name="upwall" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -57.125)
+shape = SubResource("RectangleShape2D_khj2e")
+one_way_collision_margin = 0.0
+
+[node name="downwall" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1137.5)
+shape = SubResource("RectangleShape2D_rjjlc")
+
+[node name="leftgoal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="leftgoal"]
+position = Vector2(-50.5, 540)
+shape = SubResource("RectangleShape2D_31iym")
+
+[node name="rightgoal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rightgoal"]
+position = Vector2(1973, 540)
+shape = SubResource("RectangleShape2D_42okp")
+
+[node name="hub" type="CanvasLayer" parent="."]
+
+[node name="result bot" type="Label" parent="hub"]
+offset_left = 970.0
+offset_top = 1.0
+offset_right = 1078.0
+offset_bottom = 66.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="result player" type="Label" parent="hub"]
+texture_filter = 1
+custom_minimum_size = Vector2(20, 0)
+offset_left = 860.0
+offset_right = 960.0
+offset_bottom = 70.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="meio" type="StaticBody2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="meio"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 960.0
+offset_right = 970.0
+offset_bottom = 1079.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="meio"]
+position = Vector2(965, 539.5)
+shape = SubResource("RectangleShape2D_25dte")
